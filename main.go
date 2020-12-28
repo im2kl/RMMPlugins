@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	anydesk.Start()
+	anydesk.Version()
 }

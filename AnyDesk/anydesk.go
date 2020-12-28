@@ -1,11 +1,8 @@
-package anydesk
+package AnyDesk
 
 import (
 	"fmt"
 	"io"
-	"log"
-	"net/http"
-	"os"
 	"os/exec"
 )
 
@@ -19,16 +16,16 @@ var cmd = &exec.Cmd{
 	Args: []string{"--plain", "--plain"},
 }
 
-func Start() {
+func initAnyDesk() (err error) {
 
-	err := checkFile(anyDeskPath)
+	err = checkFile(anyDeskPath)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	stdin, err := cmd.StdinPipe()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	go func() {
@@ -38,58 +35,20 @@ func Start() {
 
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	fmt.Printf("%s\n", out)
-
-}
-
-func checkFile(filepath string) (err error) {
-	if _, err := os.Stat(filepath); err == nil {
-		// path/to/whatever exists
-
-	} else if os.IsNotExist(err) {
-		// path/to/whatever does *not* exist
-		err := downloadFile(filepath, anyDeskDownLink)
-		if err != nil {
-			log.Fatal(err)
-			return err
-		}
-
-	} else {
-		// Schrodinger: file may or may not exist. See err for details.
-
-		// Therefore, do *NOT* use !os.IsNotExist(err) to test for file existence
-		if err != nil {
-			log.Fatal(err)
-			return err
-		}
-	}
 	return nil
 }
 
-func downloadFile(filepath string, url string) (err error) {
+// Version Get version of AnyDesk binary
+func Version() (err error) {
+	cmd.Args = []string{"--plain", "--version"}
+	err = initAnyDesk()
 
-	// Create the file
-	out, err := os.Create(filepath)
 	if err != nil {
 		return err
 	}
-	defer out.Close()
-
-	// Get the data
-	resp, err := http.Get(url)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	// Writer the body to file
-	_, err = io.Copy(out, resp.Body)
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
