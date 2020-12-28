@@ -1,7 +1,7 @@
 package main
 
 import (
-	anydesk "github.com/im2kl/AnyDesk-Wrapper/Anydesk"
+	anydesk "github.com/im2kl/RMMPlugins/Anydesk"
 )
 
 func main() {
