@@ -13,8 +13,10 @@ const anyDeskPath = ".\\Vendor\\AnyDesk.exe"
 
 var cmd = &exec.Cmd{
 	Path: anyDeskPath,
-	Args: []string{"--plain", "--plain"},
+	Args: []string{anyDeskPath, "--plain"},
 }
+
+var returnedoutput = ""
 
 func initAnyDesk() (err error) {
 
@@ -37,18 +39,48 @@ func initAnyDesk() (err error) {
 	if err != nil {
 		return err
 	}
-
-	fmt.Printf("%s\n", out)
+	returnedoutput = string(out)
+	//fmt.Printf("%s\n", out)
 	return nil
 }
 
 // Version Get version of AnyDesk binary
 func Version() (err error) {
-	cmd.Args = []string{"--plain", "--version"}
+	cmd.Args = []string{anyDeskPath, "--version"}
 	err = initAnyDesk()
-
 	if err != nil {
 		return err
 	}
+	fmt.Printf("%s\n", returnedoutput)
+	return nil
+}
+
+func GetStatus() (err error) {
+	cmd.Args = []string{anyDeskPath, "--get-status"}
+	err = initAnyDesk()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%s\n", returnedoutput)
+	return nil
+}
+
+func GetID() (err error) {
+	cmd.Args = []string{anyDeskPath, "--get-id"}
+	err = initAnyDesk()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%s\n", returnedoutput)
+	return nil
+}
+
+func GetAlias() (err error) {
+	cmd.Args = []string{anyDeskPath, "--get-alias"}
+	err = initAnyDesk()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%s\n", returnedoutput)
 	return nil
 }
