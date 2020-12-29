@@ -84,3 +84,13 @@ func GetAlias() (err error) {
 	fmt.Printf("%s\n", returnedoutput)
 	return nil
 }
+
+func Uninstall() (err error) {
+	cmd.Args = []string{anyDeskPath, "--remove"}
+	err = initAnyDesk()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%s\n", returnedoutput)
+	return nil
+}
