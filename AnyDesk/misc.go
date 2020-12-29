@@ -54,3 +54,19 @@ func downloadFile(filepath string, url string) (err error) {
 
 	return nil
 }
+
+func CheckService() (running bool, err error) {
+
+	cmd.Args = []string{anyDeskPath, "--get-status"}
+	err = initAnyDesk()
+	if err != nil {
+		return false, err
+	}
+
+	if &returnedoutput == nil {
+		return false, nil
+	}
+
+	//fmt.Printf("%s\n", returnedoutput)
+	return true, nil
+}
