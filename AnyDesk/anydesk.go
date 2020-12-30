@@ -1,7 +1,6 @@
 package AnyDesk
 
 import (
-	"fmt"
 	"io"
 	"os/exec"
 )
@@ -45,44 +44,40 @@ func initAnyDesk() (err error) {
 }
 
 // Version Get version of AnyDesk binary
-func Version() (err error) {
+func Version() (rtn string, err error) {
 	cmd.Args = []string{anyDeskPath, "--version"}
 	err = initAnyDesk()
 	if err != nil {
-		return err
+		return "", err
 	}
-	fmt.Printf("%s\n", returnedoutput)
-	return nil
+	return returnedoutput, nil
 }
 
-func GetStatus() (err error) {
+func GetStatus() (rtn string, err error) {
 	cmd.Args = []string{anyDeskPath, "--get-status"}
 	err = initAnyDesk()
 	if err != nil {
-		return err
+		return "", err
 	}
-	fmt.Printf("%s\n", returnedoutput)
-	return nil
+	return returnedoutput, nil
 }
 
-func GetID() (err error) {
+func GetID() (rtn string, err error) {
 	cmd.Args = []string{anyDeskPath, "--get-id"}
 	err = initAnyDesk()
 	if err != nil {
-		return err
+		return "", err
 	}
-	fmt.Printf("%s\n", returnedoutput)
-	return nil
+	return returnedoutput, nil
 }
 
-func GetAlias() (err error) {
+func GetAlias() (rtn string, err error) {
 	cmd.Args = []string{anyDeskPath, "--get-alias"}
 	err = initAnyDesk()
 	if err != nil {
-		return err
+		return "", err
 	}
-	fmt.Printf("%s\n", returnedoutput)
-	return nil
+	return returnedoutput, nil
 }
 
 func Uninstall() (err error) {
@@ -91,6 +86,5 @@ func Uninstall() (err error) {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("%s\n", returnedoutput)
 	return nil
 }
