@@ -88,3 +88,19 @@ func Uninstall() (err error) {
 	}
 	return nil
 }
+
+func Install() (err error) {
+	t, err := CheckService()
+	if err != nil {
+		return err
+	}
+
+	if t != true {
+		cmd.Args = []string{anyDeskPath, "--install . --start-with-win"}
+		err = initAnyDesk()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
