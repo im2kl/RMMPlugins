@@ -1,9 +1,17 @@
 package main
 
 import (
-	anydesk "github.com/im2kl/RMMPlugins/Anydesk"
+	"github.com/im2kl/RMMPlugins/AnyDesk"
 )
 
 func main() {
-	anydesk.Version()
+	//AnyDesk.Version()
+
+	err := AnyDesk.Install()
+	if err != nil {
+		println(err.Error())
+	}
+
+	//AnyDesk.Version()
+
 }
