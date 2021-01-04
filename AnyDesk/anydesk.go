@@ -1,14 +1,14 @@
 package AnyDesk
 
 import (
-	"io"
 	"os/exec"
+	"time"
 )
 
 // https://support.anydesk.com/Automatic_Deployment
 
 const anyDeskDownLink = "https://download.anydesk.com/AnyDesk-CM.exe"
-const anyDeskPath = ".\\Vendor\\AnyDesk.exe"
+const anyDeskPath = ".\\AnyDesk.exe"
 
 var cmd = &exec.Cmd{
 	Path: anyDeskPath,
@@ -31,7 +31,7 @@ func initAnyDesk() (err error) {
 
 	go func() {
 		defer stdin.Close()
-		io.WriteString(stdin, "values written to stdin are passed to cmd's standard input")
+		//io.WriteString(stdin, "values written to stdin are passed to cmd's standard input")
 	}()
 
 	out, err := cmd.CombinedOutput()
@@ -39,6 +39,7 @@ func initAnyDesk() (err error) {
 		return err
 	}
 	returnedoutput = string(out)
+	time.Sleep(2 * time.Second)
 	//fmt.Printf("%s\n", out)
 	return nil
 }
@@ -90,17 +91,17 @@ func Uninstall() (err error) {
 }
 
 func Install() (err error) {
-	t, err := CheckService()
-	if err != nil {
-		return err
-	}
+	t, _ := CheckService()
 
+	//time.Sleep(2 * time.Second)
 	if t != true {
 		cmd.Args = []string{anyDeskPath, "--install . --start-with-win"}
 		err = initAnyDesk()
 		if err != nil {
 			return err
 		}
+		println("intall now ...")
+
 	}
 	return nil
 }
