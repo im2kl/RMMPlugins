@@ -60,7 +60,7 @@ func CheckService() (running bool, err error) {
 	cmd.Args = []string{anyDeskPath, "--get-status"}
 	err = initAnyDesk()
 	if err != nil {
-		return false, err
+		return false, nil
 	}
 
 	if &returnedoutput == nil {
