@@ -1,52 +1,14 @@
 package AnyDesk
 
-import (
-	"os/exec"
-	"time"
-)
-
 // https://support.anydesk.com/Automatic_Deployment
 
 const anyDeskDownLink = "https://download.anydesk.com/AnyDesk-CM.exe"
 const anyDeskPath = ".\\AnyDesk.exe"
 
-var cmd = &exec.Cmd{
-	Path: anyDeskPath,
-	Args: []string{anyDeskPath, "--plain"},
-}
-
-var returnedoutput = ""
-
-func initAnyDesk() (err error) {
-
-	err = checkFile(anyDeskPath)
-	if err != nil {
-		return err
-	}
-
-	stdin, err := cmd.StdinPipe()
-	if err != nil {
-		return err
-	}
-
-	go func() {
-		defer stdin.Close()
-		//io.WriteString(stdin, "values written to stdin are passed to cmd's standard input")
-	}()
-
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		return err
-	}
-	returnedoutput = string(out)
-	time.Sleep(2 * time.Second)
-	//fmt.Printf("%s\n", out)
-	return nil
-}
-
 // Version Get version of AnyDesk binary
 func Version() (rtn string, err error) {
-	cmd.Args = []string{anyDeskPath, "--version"}
+	//CmdArgs = []string{"--version"}
+	cmd.Args = []string{"--version"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -55,7 +17,7 @@ func Version() (rtn string, err error) {
 }
 
 func GetStatus() (rtn string, err error) {
-	cmd.Args = []string{anyDeskPath, "--get-status"}
+	cmd.Args = []string{"--get-status"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -64,7 +26,7 @@ func GetStatus() (rtn string, err error) {
 }
 
 func GetID() (rtn string, err error) {
-	cmd.Args = []string{anyDeskPath, "--get-id"}
+	cmd.Args = []string{"--get-id"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -73,7 +35,7 @@ func GetID() (rtn string, err error) {
 }
 
 func GetAlias() (rtn string, err error) {
-	cmd.Args = []string{anyDeskPath, "--get-alias"}
+	cmd.Args = []string{"--get-alias"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -82,7 +44,7 @@ func GetAlias() (rtn string, err error) {
 }
 
 func Uninstall() (err error) {
-	cmd.Args = []string{anyDeskPath, "--remove"}
+	cmd.Args = []string{"--remove"}
 	err = initAnyDesk()
 	if err != nil {
 		return err
@@ -95,13 +57,13 @@ func Install() (err error) {
 
 	//time.Sleep(2 * time.Second)
 	if t != true {
-		cmd.Args = []string{anyDeskPath, "--install . --start-with-win"}
+		// Better handle the service install
+		cmd.Args = []string{"--install", ".", "--start-with-win"}
 		err = initAnyDesk()
 		if err != nil {
 			return err
 		}
-		println("intall now ...")
-
+		//InstallService()
 	}
 	return nil
 }
