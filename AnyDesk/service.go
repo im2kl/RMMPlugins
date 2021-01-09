@@ -102,7 +102,7 @@ func InstallService() {
 	//	return
 	//}
 
-	err = s.Uninstall()
+	err = s.Install()
 	if err != nil {
 		println(err.Error())
 	}
