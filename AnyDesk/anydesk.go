@@ -8,7 +8,7 @@ const anyDeskPath = ".\\AnyDesk.exe"
 // Version Get version of AnyDesk binary
 func Version() (rtn string, err error) {
 	//CmdArgs = []string{"--version"}
-	cmd.Args = []string{"--version"}
+	CmdArgs = []string{"--version"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -17,7 +17,7 @@ func Version() (rtn string, err error) {
 }
 
 func GetStatus() (rtn string, err error) {
-	cmd.Args = []string{"--get-status"}
+	CmdArgs = []string{"--get-status"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -26,7 +26,7 @@ func GetStatus() (rtn string, err error) {
 }
 
 func GetID() (rtn string, err error) {
-	cmd.Args = []string{"--get-id"}
+	CmdArgs = []string{"--get-id"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -35,7 +35,7 @@ func GetID() (rtn string, err error) {
 }
 
 func GetAlias() (rtn string, err error) {
-	cmd.Args = []string{"--get-alias"}
+	CmdArgs = []string{"--get-alias"}
 	err = initAnyDesk()
 	if err != nil {
 		return "", err
@@ -44,7 +44,7 @@ func GetAlias() (rtn string, err error) {
 }
 
 func Uninstall() (err error) {
-	cmd.Args = []string{"--remove"}
+	CmdArgs = []string{"--remove"}
 	err = initAnyDesk()
 	if err != nil {
 		return err
@@ -58,7 +58,7 @@ func Install() (err error) {
 	//time.Sleep(2 * time.Second)
 	if t != true {
 		// Better handle the service install
-		cmd.Args = []string{"--install", ".", "--start-with-win"}
+		CmdArgs = []string{"--install", ".", "--start-with-win"}
 		err = initAnyDesk()
 		if err != nil {
 			return err
