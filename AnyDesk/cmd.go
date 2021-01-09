@@ -9,8 +9,9 @@ import (
 	"sync"
 )
 
-//var CmdArgs = []string{"--plain"}
-var cmd = exec.Command(anyDeskPath)
+var CmdArgs = []string{"--plain"}
+
+//var cmd = exec.Command(anyDeskPath)
 var returnedoutput = ""
 
 func callCmd() {
@@ -20,8 +21,8 @@ func callCmd() {
 		println(err.Error())
 	}
 
-	//cmd.Args = CmdArgs
-	//cmd := exec.Command(anyDeskPath, cmd)
+	cmd := exec.Command(anyDeskPath)
+	cmd.Args = CmdArgs
 	//if runtime.GOOS == "windows" {
 	//	cmd = exec.Command("tasklist")
 	//}
