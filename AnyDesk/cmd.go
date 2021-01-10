@@ -3,7 +3,6 @@ package AnyDesk
 import (
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"os/exec"
 	"sync"
@@ -14,11 +13,11 @@ var CmdArgs = []string{"--plain"}
 //var cmd = exec.Command(anyDeskPath)
 var returnedoutput = ""
 
-func callCmd() {
+func callCmd() (err error) {
 
-	err := checkFile(anyDeskPath)
+	err = checkFile(anyDeskPath)
 	if err != nil {
-		println(err.Error())
+		return err
 	}
 
 	cmd := exec.Command(anyDeskPath)
@@ -33,7 +32,7 @@ func callCmd() {
 	stderrIn, _ := cmd.StderrPipe()
 	err = cmd.Start()
 	if err != nil {
-		log.Fatalf("cmd.Start() failed with '%s'\n", err)
+		return err
 	}
 
 	// cmd.Wait() should be called only after we finish reading
@@ -52,13 +51,18 @@ func callCmd() {
 
 	err = cmd.Wait()
 	if err != nil {
-		log.Fatalf("cmd.Run() failed with %s\n", err)
+		//"cmd.Run() failed
+		return err
 	}
+
+	// Must find better way to return error or return value.
 	if errStdout != nil || errStderr != nil {
-		log.Fatal("failed to capture stdout or stderr\n")
+		//"failed to capture stdout or stderr
+		return err
 	}
 	outStr, errStr := string(stdout), string(stderr)
 	fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
+	return nil
 }
 
 func copyAndCapture(w io.Writer, r io.Reader) ([]byte, error) {
