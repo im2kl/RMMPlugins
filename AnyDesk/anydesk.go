@@ -9,7 +9,7 @@ const anyDeskPath = ".\\AnyDesk.exe"
 func Version() (rtn string, err error) {
 	//CmdArgs = []string{"--version"}
 	CmdArgs = []string{"--version"}
-	err = initAnyDesk()
+	err = callCmd()
 	if err != nil {
 		return "", err
 	}
@@ -18,7 +18,7 @@ func Version() (rtn string, err error) {
 
 func GetStatus() (rtn string, err error) {
 	CmdArgs = []string{"--get-status"}
-	err = initAnyDesk()
+	err = callCmd()
 	if err != nil {
 		return "", err
 	}
@@ -27,7 +27,7 @@ func GetStatus() (rtn string, err error) {
 
 func GetID() (rtn string, err error) {
 	CmdArgs = []string{"--get-id"}
-	err = initAnyDesk()
+	err = callCmd()
 	if err != nil {
 		return "", err
 	}
@@ -36,7 +36,7 @@ func GetID() (rtn string, err error) {
 
 func GetAlias() (rtn string, err error) {
 	CmdArgs = []string{"--get-alias"}
-	err = initAnyDesk()
+	err = callCmd()
 	if err != nil {
 		return "", err
 	}
@@ -45,7 +45,7 @@ func GetAlias() (rtn string, err error) {
 
 func Uninstall() (err error) {
 	CmdArgs = []string{"--remove"}
-	err = initAnyDesk()
+	err = callCmd()
 	if err != nil {
 		return err
 	}
@@ -59,7 +59,7 @@ func Install() (err error) {
 	if t != true {
 		// Better handle the service install
 		CmdArgs = []string{"--install", ".", "--start-with-win"}
-		err = initAnyDesk()
+		err = callCmd()
 		if err != nil {
 			return err
 		}

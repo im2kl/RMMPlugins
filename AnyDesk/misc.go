@@ -58,7 +58,7 @@ func downloadFile(filepath string, url string) (err error) {
 func CheckService() (running bool, err error) {
 
 	CmdArgs = []string{anyDeskPath, "--get-status"}
-	err = initAnyDesk()
+	err = callCmd()
 	if err != nil {
 		return false, nil
 	}

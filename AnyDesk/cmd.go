@@ -87,27 +87,3 @@ func copyAndCapture(w io.Writer, r io.Reader) ([]byte, error) {
 		}
 	}
 }
-
-func initAnyDesk() (err error) {
-
-	callCmd()
-	//stdin, err := cmd.StdinPipe()
-	//if err != nil {
-	//	return err
-	//}
-
-	//go func() {
-	//	defer stdin.Close()
-	//io.WriteString(stdin, "values written to stdin are passed to cmd's standard input")
-	//}()
-
-	//out, err := cmd.CombinedOutput()
-	//if err != nil {
-	//	return err
-	//}
-
-	//returnedoutput = string(out)
-
-	//fmt.Printf("%s\n", out)
-	return nil
-}
