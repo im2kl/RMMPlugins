@@ -58,7 +58,7 @@ func Install() (err error) {
 	//time.Sleep(2 * time.Second)
 	if t != true {
 		// Better handle the service install
-		CmdArgs = []string{"--install", ".", "--start-with-win"}
+		CmdArgs = []string{"--install", anyDeskPath, "--start-with-win"}
 		err = callCmd()
 		if err != nil {
 			return err
