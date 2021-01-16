@@ -62,6 +62,7 @@ func callCmd() (err error) {
 	}
 	outStr, errStr := string(stdout), string(stderr)
 	fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
+	returnedoutput = outStr
 	return nil
 }
 
