@@ -1,14 +1,11 @@
 package AnyDesk
 
 import (
-	"fmt"
 	"io"
 	"os"
 	"os/exec"
 	"sync"
 )
-
-var CmdArgs = []string{"--plain"}
 
 //var cmd = exec.Command(anyDeskPath)
 var returnedoutput = ""
@@ -60,8 +57,9 @@ func callCmd() (err error) {
 		//"failed to capture stdout or stderr
 		return err
 	}
-	outStr, errStr := string(stdout), string(stderr)
-	fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
+	outStr, _ := string(stdout), string(stderr)
+	//will apply error ourput in future
+	//fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
 	returnedoutput = outStr
 	return nil
 }

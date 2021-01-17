@@ -5,6 +5,8 @@ package AnyDesk
 const anyDeskDownLink = "https://download.anydesk.com/AnyDesk-CM.exe"
 const anyDeskPath = ".\\AnyDesk.exe"
 
+var CmdArgs = []string{"--plain"}
+
 // Version Get version of AnyDesk binary
 func Version() (rtn string, err error) {
 	//CmdArgs = []string{"--version"}

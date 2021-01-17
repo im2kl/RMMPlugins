@@ -5,13 +5,8 @@ import (
 )
 
 func main() {
-	//AnyDesk.Version()
-
-	err := AnyDesk.Install()
-	if err != nil {
-		println(err.Error())
-	}
-
-	//AnyDesk.Version()
-
+	AnyDesk.Version()
+	AnyDesk.GetAlias()
+	AnyDesk.GetID()
+	AnyDesk.GetStatus()
 }
